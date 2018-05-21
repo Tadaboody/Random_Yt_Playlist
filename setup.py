@@ -6,7 +6,7 @@ setup(
     version='0.1',
     py_modules=['script'],
     install_requires=[
-        'click','requests','bs4'
+        'click','requests',
     ],
     entry_points='''
         [console_scripts]

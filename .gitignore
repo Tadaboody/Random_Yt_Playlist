@@ -1,2 +1,4 @@
 /venv
 /.vscode
+/random_yt_playlist.egg-info
+/__pycache__

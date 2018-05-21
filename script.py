@@ -6,6 +6,7 @@ import webbrowser
 from typing import Sequence
 
 import click
+from click_default_group import DefaultGroup
 
 LIST_JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'playlists.json')
 
@@ -14,7 +15,7 @@ def print(*args, **kwargs):
     click.echo(*args, **kwargs)
 
 
-@click.group()
+@click.group(cls=DefaultGroup,default='play',default_if_no_args=True)
 def cli():
     pass
 

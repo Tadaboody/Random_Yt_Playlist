@@ -2,3 +2,5 @@
 /.vscode
 /random_yt_playlist.egg-info
 /__pycache__
+/playlists.json
+/.pytest_cache

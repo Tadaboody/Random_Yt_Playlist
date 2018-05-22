@@ -15,26 +15,35 @@ def print(*args, **kwargs):
     click.echo(*args, **kwargs)
 
 
-@click.group(cls=DefaultGroup,default='play',default_if_no_args=True)
+@click.group(cls=DefaultGroup, default='play', default_if_no_args=True)
 def cli():
     pass
 
 
+def get_yt_html():
+    html = requests.get(yt_endpoint(), cookies=browser_cookie3.load()).content
+    html = html.decode("utf-8")  # cast from bytes to strng
+    return html
+
+
+import requests
+import browser_cookie3
+
+
 @cli.command("parse")
-@click.argument("html_path")
-def parse_command(html_path : str):
-    with open(html_path, encoding='utf8') as fp:
-        playlist_list = list(parse(fp.read()))
-    save_list(playlist_list,LIST_JSON_PATH)
+def parse_command():
+    playlist_list = list(parse(get_yt_html()))
+    save_list(playlist_list, LIST_JSON_PATH)
 
 
-def save_list(playlist_list : list, save_path : str):
+def save_list(playlist_list: list, save_path: str):
     with open(save_path, 'w') as fp:
-        json.dump(playlist_list, fp,indent=0)
+        json.dump(playlist_list, fp, indent=0)
 
 
 def yt_endpoint(*args: Sequence[str]) -> str:
-    return '/'.join(['https://www.youtube.com',*args])
+    return '/'.join(['https://www.youtube.com', *args])
+
 
 @cli.command("play")
 def play_command():
@@ -52,7 +61,6 @@ def parse(html: str) -> Sequence[str]:
     playlist_re = r"(watch\?v=[^\"]+list=[^\"]+\")"
     return set(match.group().strip('\"') for match in re.finditer(playlist_re, html))
 
+
 if __name__ == '__main__':
-    with open(LIST_JSON_PATH) as fp:
-        playlist_list = json.load(fp)
-    play_random_playlist(playlist_list)
+    parse_command()

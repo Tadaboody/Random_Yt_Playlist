@@ -32,8 +32,7 @@ import browser_cookie3
 
 @cli.command("parse")
 def parse_command():
-    playlist_list = list(parse(get_yt_html()))
-    save_list(playlist_list, LIST_JSON_PATH)
+    get_random_playlist_link(cache=True)
 
 
 def save_list(playlist_list: list, save_path: str):
@@ -48,19 +47,26 @@ def yt_endpoint(*args: Sequence[str]) -> str:
 @cli.command("play")
 @click.pass_context
 def play_command(ctx):
+    webbrowser.open_new_tab(get_random_playlist_link())
+
+
+def get_playlist_list(cache=True,*,cache_path=LIST_JSON_PATH):
+    playlist_list = list()
     try:
         with open(LIST_JSON_PATH) as fp:
             playlist_list = json.load(fp)
-        play_random_playlist(playlist_list)
     # in case the json doesn't exist, is empty or is an empty list
-    except (FileNotFoundError, json.JSONDecodeError, IndexError):
-        parse_command.invoke(ctx)
-        play_command()
+    except (FileNotFoundError, json.JSONDecodeError, ):
+        ...
+    if not playlist_list or not cache:
+        playlist_list = parse(get_yt_html())
+    if cache:
+        save_list(playlist_list, cache_path)
+    return playlist_list
 
 
-def play_random_playlist(playlist_list: Sequence[str]):
-    opened_playlist = yt_endpoint(random.choice(playlist_list))
-    webbrowser.open_new_tab(yt_endpoint(random.choice(playlist_list)))
+def get_random_playlist_link(cache=True, cache_path=LIST_JSON_PATH) -> str:
+    return yt_endpoint(random.choice(get_playlist_list(cache,cache_path=cache_path)))
 
 
 def parse(html: str) -> Sequence[str]:

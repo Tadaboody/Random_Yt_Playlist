@@ -10,6 +10,6 @@ setup(
     ],
     entry_points='''
         [console_scripts]
-        random_yt_playlist=script:cli
+        random_yt_playlist=random_yt_playlist.script:cli
     ''',
 )

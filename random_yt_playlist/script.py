@@ -46,10 +46,16 @@ def yt_endpoint(*args: Sequence[str]) -> str:
 
 
 @cli.command("play")
-def play_command():
-    with open(LIST_JSON_PATH) as fp:
-        playlist_list = json.load(fp)
-    play_random_playlist(playlist_list)
+@click.pass_context
+def play_command(ctx):
+    try:
+        with open(LIST_JSON_PATH) as fp:
+            playlist_list = json.load(fp)
+        play_random_playlist(playlist_list)
+    # in case the json doesn't exist, is empty or is an empty list
+    except (FileNotFoundError, json.JSONDecodeError, IndexError):
+        parse_command.invoke(ctx)
+        play_command()
 
 
 def play_random_playlist(playlist_list: Sequence[str]):
@@ -63,4 +69,4 @@ def parse(html: str) -> Sequence[str]:
 
 
 if __name__ == '__main__':
-    parse_command()
+    play_command()

@@ -15,12 +15,12 @@ function choose(array)
     return array[Math.floor(Math.random() * array.length)];
 }
 function yt_endpoint(...args) {
-    const base_url = "https://www.youtube.com"
+    const base_url = "https://www.youtube.com";
     return args.reduce((acc, current) => acc + '/' + current, base_url);
 }
 
 function get_yt_html(cb) {
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open("GET", yt_endpoint());
     xhr.onloadend = () => {
         if (xhr.status == 200) {
@@ -34,8 +34,8 @@ function get_yt_html(cb) {
 
 function get_playlists(html)
 {
-    playlist_regex = /(watch\?v=[^\"]+list=[^\"]+)\"/g;
-    playlist_list = html.match(playlist_regex);
+    const playlist_regex = /(watch\?v=[^\"]+list=[^\"]+)\"/g;
+    const playlist_list = html.match(playlist_regex);
     console.log(playlist_list);
     return playlist_list;
 }
@@ -43,7 +43,7 @@ function get_playlists(html)
 function open_url(url, parameters={active : true, pinned : false, new_window : false}) {
     
     if (parameters.new_window) {
-        chrome.windows.create({ url: url })
+        chrome.windows.create({ url: url });
     }
     else {
         chrome.tabs.create({

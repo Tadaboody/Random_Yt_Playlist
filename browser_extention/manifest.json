@@ -8,5 +8,5 @@
     "background" : {
       "scripts" : ["background.js"]
     },
-    "permissions":["tabs"]
+    "permissions":["tabs","https://www.youtube.com/"]
 }

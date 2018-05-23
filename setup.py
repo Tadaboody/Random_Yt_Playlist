@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
     name='random_yt_playlist',
     version='0.1',
-    py_modules=['script'],
+    packages=['random_yt_playlist'],
     install_requires=[
         'click','requests','click_default_group','browser_cookie3'
     ],

@@ -2,5 +2,6 @@
 /.vscode
 /random_yt_playlist.egg-info
 *cache*
-*.json
+*playlists.json
 */.pytest_cache
+/tests/dynamic_webpage.html

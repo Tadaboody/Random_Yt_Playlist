@@ -34,7 +34,7 @@ function get_yt_html(cb) {
 }
 
 function get_playlists(html) {
-    const playlist_regex = /(watch\?v=[^\"]+list=[^\"]+)\"/g;
+    const playlist_regex = /(watch\?[^\"]*list=[^\"]+)\"/g;
     const playlist_list = html.match(playlist_regex);
     console.log(playlist_list);
     return playlist_list;

@@ -5,3 +5,4 @@
 *playlists.json
 */.pytest_cache
 /tests/dynamic_webpage.html
+/browser_extention/key.pem

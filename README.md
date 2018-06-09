@@ -1,7 +1,7 @@
 # Random Youtube Playlist
 A tool to open a random saved youtube playlist
 
-You can find the chrome extention version [here](https://chrome.google.com/webstore/detail/moodle-mass-downloader/bgljbhmiefeipdlglloembnlbecjjnce), Read its [README](\\browser_extention\\README.md) for more info
+You can find the chrome extention version [here](https://chrome.google.com/webstore/detail/moodle-mass-downloader/bgljbhmiefeipdlglloembnlbecjjnce), Read its [README](browser_extention/README.md) for more info
 
 A Cli version is also in the works and will be hosted on pypi.
 ## Setup

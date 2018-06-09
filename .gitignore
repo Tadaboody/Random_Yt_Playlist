@@ -6,3 +6,5 @@
 */.pytest_cache
 /tests/dynamic_webpage.html
 /browser_extention/key.pem
+browser_extention.crx
+random_yt_mix.zip

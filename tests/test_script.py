@@ -8,23 +8,12 @@ from random_yt_playlist import parse
 
 currnet_dir = os.path.abspath(os.path.dirname(__file__))
 
-@pytest.fixture
-def html():
-    with open(os.path.join(currnet_dir,'webpage.html'),encoding='utf-8') as fp:
-        return fp.read()
-
-@pytest.fixture
+@pytest.fixture(scope="session")
 def dynamic_html():
     """ A fixture that returns the html for youtube.com according to your current cookies """
     with open(os.path.join(currnet_dir,'dynamic_webpage.html'),'w',encoding='utf-8') as fp:
         fp.write(random_yt_playlist.get_yt_html())
     return random_yt_playlist.get_yt_html()
-
-def test_html(html):
-    assert html
-
-def test_parser_returns_playlists(html):
-    assert_is_playlist_list(parse(html))
 
 def test_parser_returns_on_dynamic(dynamic_html):
     assert_is_playlist_list(parse(dynamic_html))

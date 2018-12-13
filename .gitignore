@@ -1,10 +1,3 @@
-/venv
-/.vscode
-/random_yt_playlist.egg-info
-*cache*
-*playlists.json
-*/.pytest_cache
-/tests/dynamic_webpage.html
-/browser_extention/key.pem
+key.pem
 browser_extention.crx
 random_yt_mix.zip
